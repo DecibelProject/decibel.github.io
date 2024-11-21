@@ -1,1 +1,127 @@
-уупцупцупц404
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сайт-визитка программиста">
+    <title>Визитка программиста</title>
+    <style>
+      /* Общие стили */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Окно */
+.window {
+    width: 400px;
+    border-radius: 8px;
+    background: #2d2d2d;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: 1px solid #444;
+}
+
+/* Заголовок окна */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3c3c3c;
+    padding: 10px 15px;
+    border-bottom: 1px solid #444;
+}
+
+.header .buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.header .button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #555;
+}
+
+.header .button.red { background: #ff5f56; }
+.header .button.yellow { background: #ffbd2e; }
+.header .button.green { background: #27c93f; }
+
+.header .title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+/* Контент */
+.content {
+    padding: 20px;
+}
+
+.content h1 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #fff;
+}
+
+.content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.content ul li {
+    list-style: circle;
+    color: #aaa;
+}
+
+.content a {
+    color: #4fa3ff;
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="header">
+            <div class="buttons">
+                <span class="button red"></span>
+                <span class="button yellow"></span>
+                <span class="button green"></span>
+            </div>
+            <div class="title">Программист • Визитка</div>
+        </div>
+        <div class="content">
+            <h1>Иван Иванов</h1>
+            <p>Привет! Я программист с опытом в веб-разработке и дизайне интерфейсов.</p>
+            <p>Навыки:</p>
+            <ul>
+                <li>HTML, CSS, JavaScript</li>
+                <li>React, Vue.js</li>
+                <li>Node.js, Python</li>
+                <li>UI/UX дизайн</li>
+            </ul>
+            <p>Контакты:</p>
+            <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
+            <p>GitHub: <a href="https://github.com/username" target="_blank">github.com/username</a></p>
+        </div>
+    </div>
+</body>
+</html>
