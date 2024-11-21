@@ -1,31 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Сайт-визитка программиста">
     <title>Визитка программиста</title>
     <style>
-      /* Общие стили */
+        /* Общие стили */
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     background: #1e1e1e;
     color: #ffffff;
+    cursor: none; /* Скрываем стандартный курсор */
+}
+
+/* Контейнер, чтобы сделать центрирование на странице */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 /* Окно */
 .window {
-    width: 400px;
+    width: 600px; /* Увеличена ширина окна */
     border-radius: 8px;
     background: #2d2d2d;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Заголовок окна */
@@ -63,6 +74,7 @@ body {
 /* Контент */
 .content {
     padding: 20px;
+    overflow-y: auto; /* Добавляет прокрутку, если контента много */
 }
 
 .content h1 {
@@ -96,31 +108,73 @@ body {
     text-decoration: underline;
 }
 
+/* Эффект свечения на курсор */
+body::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: cursorGlow 0.3s ease-out;
+}
+
+/* Анимация свечения */
+@keyframes cursorGlow {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Реализация позиции курсора */
+body:hover::after {
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+}
+
+/* Скрипт для обновления позиции курсора */
+<script>
+    document.addEventListener("mousemove", function(e) {
+        document.body.style.setProperty('--mouse-x', e.pageX + 'px');
+        document.body.style.setProperty('--mouse-y', e.pageY + 'px');
+    });
+</script>
+
     </style>
 </head>
 <body>
-    <div class="window">
-        <div class="header">
-            <div class="buttons">
-                <span class="button red"></span>
-                <span class="button yellow"></span>
-                <span class="button green"></span>
+    <div class="container">
+        <div class="window">
+            <div class="header">
+                <div class="buttons">
+                    <span class="button red"></span>
+                    <span class="button yellow"></span>
+                    <span class="button green"></span>
+                </div>
+                <div class="title">Программист • Визитка</div>
             </div>
-            <div class="title">Программист • Визитка</div>
-        </div>
-        <div class="content">
-            <h1>Иван Иванов</h1>
-            <p>Привет! Я программист с опытом в веб-разработке и дизайне интерфейсов.</p>
-            <p>Навыки:</p>
-            <ul>
-                <li>HTML, CSS, JavaScript</li>
-                <li>React, Vue.js</li>
-                <li>Node.js, Python</li>
-                <li>UI/UX дизайн</li>
-            </ul>
-            <p>Контакты:</p>
-            <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-            <p>GitHub: <a href="https://github.com/username" target="_blank">github.com/username</a></p>
+            <div class="content">
+                <h1>Иван Иванов</h1>
+                <p>Привет! Я программист с опытом в веб-разработке и дизайне интерфейсов.</p>
+                <p>Навыки:</p>
+                <ul>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>React, Vue.js</li>
+                    <li>Node.js, Python</li>
+                    <li>UI/UX дизайн</li>
+                </ul>
+                <p>Контакты:</p>
+                <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
+                <p>GitHub: <a href="https://github.com/username" target="_blank">github.com/username</a></p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+            </div>
         </div>
     </div>
 </body>
