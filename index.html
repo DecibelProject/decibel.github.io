@@ -16,7 +16,7 @@ body {
     font-family: "Segoe UI", Arial, sans-serif;
     background: #1e1e1e;
     color: #ffffff;
-    cursor: none; /* Скрываем стандартный курсор */
+    overflow: hidden; /* Запрещаем скроллинг страницы */
 }
 
 /* Контейнер, чтобы сделать центрирование на странице */
@@ -37,6 +37,8 @@ body {
     border: 1px solid #444;
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
 /* Заголовок окна */
@@ -75,6 +77,8 @@ body {
 .content {
     padding: 20px;
     overflow-y: auto; /* Добавляет прокрутку, если контента много */
+    opacity: 0;
+    animation: contentFadeIn 1s 0.5s forwards; /* Анимация появления контента */
 }
 
 .content h1 {
@@ -108,9 +112,30 @@ body {
     text-decoration: underline;
 }
 
-/* Эффект свечения на курсор */
-body::after {
-    content: "";
+/* Анимация появления окна */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Анимация появления контента */
+@keyframes contentFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Курсор с эффектом свечения */
+.cursor {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -118,25 +143,23 @@ body::after {
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    animation: cursorGlow 0.3s ease-out;
+    animation: cursorGlow 0.3s ease-out infinite;
 }
 
-/* Анимация свечения */
+/* Анимация свечения курсора */
 @keyframes cursorGlow {
     0% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.6;
     }
-    100% {
+    50% {
         transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
+        opacity: 1;
     }
-}
-
-/* Реализация позиции курсора */
-body:hover::after {
-    top: var(--mouse-y);
-    left: var(--mouse-x);
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
 }
 
     </style>
@@ -170,12 +193,15 @@ body:hover::after {
         </div>
     </div>
 
-    /* Скрипт для обновления позиции курсора */
-<script>
-    document.addEventListener("mousemove", function(e) {
-        document.body.style.setProperty('--mouse-x', e.pageX + 'px');
-        document.body.style.setProperty('--mouse-y', e.pageY + 'px');
-    });
-</script>
+    <script>
+        // Добавление анимации для позиционирования кастомного курсора
+        document.addEventListener("mousemove", function(e) {
+            const cursor = document.querySelector(".cursor");
+            cursor.style.left = e.pageX + "px";
+            cursor.style.top = e.pageY + "px";
+        });
+    </script>
+
+    <div class="cursor"></div>
 </body>
 </html>
