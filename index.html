@@ -139,14 +139,6 @@ body:hover::after {
     left: var(--mouse-x);
 }
 
-/* Скрипт для обновления позиции курсора */
-<script>
-    document.addEventListener("mousemove", function(e) {
-        document.body.style.setProperty('--mouse-x', e.pageX + 'px');
-        document.body.style.setProperty('--mouse-y', e.pageY + 'px');
-    });
-</script>
-
     </style>
 </head>
 <body>
@@ -177,5 +169,13 @@ body:hover::after {
             </div>
         </div>
     </div>
+
+    /* Скрипт для обновления позиции курсора */
+<script>
+    document.addEventListener("mousemove", function(e) {
+        document.body.style.setProperty('--mouse-x', e.pageX + 'px');
+        document.body.style.setProperty('--mouse-y', e.pageY + 'px');
+    });
+</script>
 </body>
 </html>
