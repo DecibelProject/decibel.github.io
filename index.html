@@ -14,9 +14,10 @@ body {
     justify-content: center;
     align-items: center;
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #1e1e1e;
+    background: black;
     color: #ffffff;
     overflow: hidden; /* Запрещаем скроллинг страницы */
+    position: relative;
 }
 
 /* Контейнер, чтобы сделать центрирование на странице */
@@ -29,7 +30,7 @@ body {
 
 /* Окно */
 .window {
-    width: 600px; /* Увеличена ширина окна */
+    width: 600px;
     border-radius: 8px;
     background: #2d2d2d;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
@@ -134,32 +135,17 @@ body {
     }
 }
 
-/* Курсор с эффектом свечения */
-.cursor {
+/* Динамический круг */
+.moving-circle {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.6);
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 0, 0, 0.2); /* Начальный цвет круга */
     border-radius: 50%;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    animation: cursorGlow 0.3s ease-out infinite;
-}
-
-/* Анимация свечения курсора */
-@keyframes cursorGlow {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.6;
-    }
+    transition: all 0.2s ease;
+    will-change: transform;
+    mix-blend-mode: lighten;
 }
 
     </style>
@@ -193,15 +179,35 @@ body {
         </div>
     </div>
 
+    <div class="moving-circle"></div>
+    
     <script>
-        // Добавление анимации для позиционирования кастомного курсора
-        document.addEventListener("mousemove", function(e) {
-            const cursor = document.querySelector(".cursor");
-            cursor.style.left = e.pageX + "px";
-            cursor.style.top = e.pageY + "px";
+        // Слежение за движением мыши и передача позиции круга
+        document.addEventListener('mousemove', function(e) {
+            const circle = document.querySelector('.moving-circle');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const offsetX = (mouseX - centerX) / 10;
+            const offsetY = (mouseY - centerY) / 10;
+
+            // Устанавливаем позицию круга
+            circle.style.left = `${mouseX + offsetX}px`;
+            circle.style.top = `${mouseY + offsetY}px`;
+
+            // Меняем форму круга на основе его положения
+            const distance = Math.hypot(mouseX - centerX, mouseY - centerY);
+            const scale = 1 - distance / 1000; // Чем дальше от центра, тем меньше круг
+            circle.style.transform = `scale(${Math.max(scale, 0.3)})`;
+
+            // Меняем цвет в зависимости от положения
+            const maxDistance = Math.hypot(window.innerWidth, window.innerHeight);
+            const colorIndex = Math.floor((distance / maxDistance) * 3);
+            const colors = ['rgba(255, 0, 0, 0.2)', 'rgba(0, 0, 255, 0.2)', 'rgba(255, 255, 0, 0.2)'];
+            circle.style.backgroundColor = colors[colorIndex];
         });
     </script>
-
-    <div class="cursor"></div>
 </body>
 </html>
