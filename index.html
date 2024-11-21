@@ -7,136 +7,190 @@
     <title>Визитка программиста</title>
     <style>
         /* Общие стили */
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #fff;
-    overflow: hidden;
-    position: relative;
-}
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
 
-/* Фон с изображением */
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('back.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-}
+        /* Фон с изображением */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('back.jpg'); /* Замените на ваше изображение */
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Чтобы фон был на заднем плане */
+            filter: blur(10px);
+        }
 
-/* Контейнер для окна */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+        /* Контейнер для окна */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            opacity: 0;
+            animation: fadeIn 1.5s 0.5s forwards; /* Анимация появления */
+        }
 
-/* Окно в стиле стекла */
-.window {
-    width: 600px;
-    max-width: 90%;
-    padding: 20px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px); /* Эффект размытия фона */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    flex-direction: column;
-    color: #fff;
-    opacity: 1;
-    transition: all 0.3s ease;
-}
+        /* Окно в стиле стекла */
+        .window {
+            width: 600px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* Эффект размытия фона */
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
 
-/* Заголовок окна */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
+        /* Заголовок окна */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-.header .buttons {
-    display: flex;
-    gap: 5px;
-}
+        .header .buttons {
+            display: flex;
+            gap: 5px;
+        }
 
-.header .button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #555;
-}
+        .header .button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #555;
+        }
 
+        .header .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #aaa;
+        }
 
+        /* Контент */
+        .content {
+            padding: 20px;
+            overflow-y: auto;
+            opacity: 0;
+            animation: contentFadeIn 1.5s 1s forwards; /* Анимация появления контента */
+        }
 
-.header .title {
-    font-size: 14px;
-    font-weight: bold;
-    color: #aaa;
-}
+        .content h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #fff;
+        }
 
-/* Контент */
-.content {
-    padding: 20px;
-    overflow-y: auto;
-}
+        .content p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+        }
 
-.content h1 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #fff;
-}
+        .content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
 
-.content p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #ccc;
-}
+        .content ul li {
+            list-style: circle;
+            color: #aaa;
+        }
 
-.content ul {
-    margin: 10px 0;
-    padding-left: 20px;
-}
+        .content a {
+            color: #4fa3ff;
+            text-decoration: none;
+        }
 
-.content ul li {
-    list-style: circle;
-    color: #aaa;
-}
+        .content a:hover {
+            text-decoration: underline;
+        }
 
-.content a {
-    color: #4fa3ff;
-    text-decoration: none;
-}
+        /* Анимации */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-.content a:hover {
-    text-decoration: underline;
-}
+        @keyframes contentFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
 
-/* Кнопки окна */
-.button.red {
-    background-color: #ff5f56;
-}
+        /* Курсор с полупрозрачным светящимся эффектом */
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            transition: all 0.2s ease-out;
+            animation: pulse 1.5s infinite;
+        }
 
-.button.yellow {
-    background-color: #ffbd2e;
-}
+        /* Анимация пульсации курсора */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+            }
+            50% {
+                transform: scale(1.3);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+            }
+        }
 
-.button.green {
-    background-color: #27c93f;
-}
+        /* Кнопки окна */
+        .button.red {
+            background-color: #ff5f56;
+        }
 
+        .button.yellow {
+            background-color: #ffbd2e;
+        }
+
+        .button.green {
+            background-color: #27c93f;
+        }
     </style>
 </head>
 <body>
@@ -170,8 +224,15 @@ body {
         </div>
     </div>
 
+    <div class="cursor"></div> <!-- Курсор -->
+
     <script>
-        // Скрипт для курсора, можно добавить, если нужно
+        // Слежение за движением мыши и передача позиции курсора
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.querySelector('.cursor');
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
     </script>
 </body>
 </html>
