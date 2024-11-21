@@ -6,7 +6,7 @@
     <meta name="description" content="Decibel, Глеб Швец">
     <title>Глеб Михалыч</title>
     <style>
-        /* Общие стили */
+        
         body {
             margin: 0;
             height: 100vh;
@@ -20,7 +20,10 @@
             position: relative;
         }
 
-        /* Фон с изображением */
+        h1 {
+            font-weight: 500;
+        }
+        
         .background {
             position: absolute;
             top: 0;
@@ -94,7 +97,7 @@
             padding-right: 40px;
             overflow-y: auto;
             opacity: 0;
-            animation: contentFadeIn 1.5s 1s forwards; /* Анимация появления контента */
+            animation: contentFadeIn 1.5s 1s forwards;
         }
 
         .content h1 {
@@ -149,7 +152,6 @@
             }
         }
 
-        /* Курсор с полупрозрачным светящимся эффектом */
         .cursor {
             position: absolute;
             width: 20px;
@@ -163,7 +165,6 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* Анимация пульсации курсора */
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -179,7 +180,6 @@
             }
         }
 
-        /* Кнопки окна */
         .button.red {
             background-color: #ff5f56;
         }
@@ -194,7 +194,7 @@
     </style>
 </head>
 <body>
-    <div class="background"></div> <!-- Фоновая картинка -->
+    <div class="background"></div>
 
     <div class="container">
         <div class="window">
@@ -226,11 +226,8 @@
             </div>
         </div>
     </div>
-
-    <div class="cursor"></div> <!-- Курсор -->
-
+    <div class="cursor"></div>
     <script>
-        // Слежение за движением мыши и передача позиции курсора
         document.addEventListener('mousemove', function(e) {
             const cursor = document.querySelector('.cursor');
             cursor.style.left = `${e.clientX}px`;
